@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.edea.pages.SiteEdeaHomepage;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
 import static org.testng.AssertJUnit.assertTrue;
@@ -25,8 +26,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
         @BeforeClass(alwaysRun = true)
         public void setUp() throws Exception {
-            driver = new FirefoxDriver();
-            baseUrl = "http://www.edea.co.il/";
+            System.setProperty("webdriver.gecko.driver", "D:\\\\ToolsQA\\trunk\\Library\\drivers\\geckodriver.exe");
+            WebDriver driver = new FirefoxDriver();
+            driver.get("http://www.edea.co.il/");
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             siteEdeaHomepage = PageFactory.initElements(driver, SiteEdeaHomepage.class);
 
@@ -36,23 +38,35 @@ import org.openqa.selenium.firefox.FirefoxDriver;
           public void FamiliarityWithTheHomePageSite() {
               try {
 
-                  //siteEdeaHomepage.openMainPage();
+                 // siteEdeaHomepage.openMainPage(baseUrl);
                   siteEdeaHomepage.search_button();
                   siteEdeaHomepage.home_button();
+                  Assert.assertTrue(siteEdeaHomepage.afterPressedPageDoesNotSwitch());
                   siteEdeaHomepage.AboutIDEA_button();
                   siteEdeaHomepage.Products_button();
                   siteEdeaHomepage.Solutions_button();
                   siteEdeaHomepage.support_button();
                   siteEdeaHomepage.button_Customers();
-                  siteEdeaHomepage.button_Partners();
-                  siteEdeaHomepage.button_ContactUs();
+                  Assert.assertTrue(siteEdeaHomepage.afterPressedPageDoesNotSwitch());
 
               } catch (Exception e) {
                   e.printStackTrace();
               }
 
           }
+          @Test(groups = {"smoke"})
+          public void ContactUsPageSite() {
+              try {
 
+                  Assert.assertTrue(siteEdeaHomepage.afterPressedPageDoesNotSwitch());
+                  siteEdeaHomepage.button_ContactUs();
+                  Assert.assertTrue(siteEdeaHomepage.isOnContactUsPage());
+
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+
+          }
 
           @AfterTest(alwaysRun = true)
           public void tearDown() {

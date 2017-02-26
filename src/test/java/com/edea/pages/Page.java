@@ -38,7 +38,7 @@ public abstract class Page {
         return driver.getTitle();
     }
 
-    public String getPageUrl() {
+    public String getPageUrl(String s) {
 
         return PAGE_URL;
     }
@@ -48,7 +48,7 @@ public abstract class Page {
     }
 
     public void loadPage() {
-        driver.get(getPageUrl());
+        driver.get(getPageUrl("http://www.edea.co.il"));
 //  Assert.assertEquals(getTitle(), getPageTitle());
     }
 
@@ -213,4 +213,6 @@ public abstract class Page {
         return !cellColorBeforeClick.equals(cellColorAfterClick);
     }
 
+    public void openMainPage(String baseUrl) {
+    }
 }

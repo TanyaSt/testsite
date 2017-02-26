@@ -19,6 +19,9 @@ import org.openqa.selenium.support.PageFactory;
     @FindBy(xpath = "//*[id='menu-item-menu-item-4293']//a[@class='ubermenu-icon fa fa-home']")
     WebElement home_button;
 
+    @FindBy(xpath = "//*[@id='home']//i[@class='fusion-header-wrapper']")
+    WebElement afterPressedPageDoesNotSwitch;
+
     @FindBy(xpath = "//*[@id='menu-item-4046']//a[@class='ubermenu-target-title ubermenu-target-text']")
     WebElement AboutIDEA_button;
 
@@ -40,6 +43,11 @@ import org.openqa.selenium.support.PageFactory;
     @FindBy(xpath = "//*[@id='menu-item-1001']//a[@class='ubermenu-target-title ubermenu-target-text']")
     WebElement button_ContactUs;
 
+    @FindBy(xpath = "//*[@id='butsend']//i[@class='ajax-loader']")
+    WebElement isOnContactUsPage;
+
+
+
     public SiteEdeaHomepage(WebDriver driver) {
         super(driver);
         this.PAGE_URL = "http://www.edea.co.il";
@@ -47,7 +55,7 @@ import org.openqa.selenium.support.PageFactory;
 
     }
 
-    public SiteEdeaHomepage openMainPage(WebDriver driver, String baseUrl) {
+    public SiteEdeaHomepage openMainPage(WebDriver driver) {
         driver.get(PAGE_URL);
         return this;
     }
@@ -89,4 +97,14 @@ import org.openqa.selenium.support.PageFactory;
         clickElement(button_ContactUs);
         return this;
     }
+
+    public boolean isOnContactUsPage() {
+       // waitUntilElementIsLoaded();
+        return exists(isOnContactUsPage);
+    }
+    public boolean afterPressedPageDoesNotSwitch() {
+        // waitUntilElementIsLoaded();
+        return exists(afterPressedPageDoesNotSwitch);
+    }
+
 }
