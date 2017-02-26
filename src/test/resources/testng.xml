@@ -3,7 +3,7 @@
 <suite name="Tests" verbose="5">
   <test name="Test1">
     <classes>
-      <class name="com.edea.TestSite_Edea"/>
+      <class name="com.edea.SiteEdeaTest"/>
     </classes>
   </test>  
 </suite>
